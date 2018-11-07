@@ -1,0 +1,6 @@
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Common\bin\Debug\MyStore.Common.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Common\bin\Debug\MyStore.Common.pdb
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Common\obj\Debug\MyStore.Common.csprojAssemblyReference.cache
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Common\obj\Debug\MyStore.Common.csproj.CoreCompileInputs.cache
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Common\obj\Debug\MyStore.Common.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Common\obj\Debug\MyStore.Common.pdb

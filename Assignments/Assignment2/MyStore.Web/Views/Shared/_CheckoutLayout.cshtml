@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/regular_styles.css" rel="stylesheet" />
+    <link href="~/Content/regular_responsive.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="super_container">
+        <header class="header">
+
+            <!-- Top Bar -->
+
+            <div class="top_bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col d-flex flex-row">
+                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="@Url.Content("~/images/phone.png")" alt=""></div>+21 21 122 3570</div>
+                            <div class="top_bar_contact_item"><div class="top_bar_icon"><img src="@Url.Content("~/images/mail.png")" alt=""></div><a href="mailto:fastsales@gmail.com">labeauty@gmail.com</a></div>
+                            <div class="top_bar_content ml-auto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Main -->
+
+            <div class="header_main">
+                <div class="container">
+                    <div class="row">
+                        <!-- Logo -->
+                        <div class="col-lg-2 col-sm-3 col-3 order-1">
+                            <div class="logo_container">
+                                <div class="logo"><a href="/">LA VITA</a></div>
+                            </div>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+
+                        </div>
+                        <!-- Wishlist -->
+                        <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                            <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                                <!-- Cart -->
+                                <div class="cart">
+                                    <a href="/Products/Cart">
+                                        <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                            
+
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
+
+        <div class="container ">
+            <div class="row justify-content-md-center">
+                <div class="col-lg-10">
+                    <div class="checkout">
+                        @RenderBody()
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+                            <div class="copyright_content">
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved | <i class="fa fa-heart" aria-hidden="true"></i> by <a href="/">LA VITTA</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </div>
+                            <div class="logos ml-sm-auto">
+                                <ul class="logos_list">
+                                    <li><a href="#"><img src="images/logos_1.png" alt=""></a></li>
+                                    <li><a href="#"><img src="images/logos_2.png" alt=""></a></li>
+                                    <li><a href="#"><img src="images/logos_3.png" alt=""></a></li>
+                                    <li><a href="#"><img src="images/logos_4.png" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/scripts")
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\obj\Debug\MyStore.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\MyStore.Domain.dll.config
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\MyStore.Domain.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\MyStore.Domain.pdb
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\obj\Debug\MyStore.Domain.csprojAssemblyReference.cache
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\obj\Debug\MyStore.Domain.csproj.CopyComplete
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\obj\Debug\MyStore.Domain.dll
+C:\Users\Moses\Downloads\assessment\Assignments\Assignment2\MyStore.Domain\obj\Debug\MyStore.Domain.pdb

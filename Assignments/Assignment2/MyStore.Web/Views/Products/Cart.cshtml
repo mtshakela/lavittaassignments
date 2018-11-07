@@ -1,0 +1,260 @@
+﻿@using Newtonsoft.Json;
+@model IEnumerable<MyStore.Web.Models.ProductViewModel>
+<link href="~/Content/regular_styles.css" rel="stylesheet" />
+<link href="~/Content/regular_responsive.css" rel="stylesheet" />
+<style type="text/css">
+    .shopping_cart {
+    }
+
+        .shopping_cart table th {
+            background-color: #afafaf;
+            font-weight: bold;
+        }
+
+    .cart_item_description {
+    }
+
+        .cart_item_description .image {
+            width: 190px;
+            float: left;
+            border: 1px solid #808080;
+        }
+
+        .cart_item_description .description {
+            width: 190px;
+            float: left;
+            padding: 8px;
+        }
+
+    .cart-buybox {
+        background: #f5f5f5;
+        float: right;
+        padding: 12px 15px 15px;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        width: 100%;
+    }
+
+        .cart-buybox h3 {
+            font-family: Arial,Helvetica,sans-serif;
+            font-size: 15px;
+            color: #333;
+            font-weight: 700;
+            border-bottom: 1px solid #d8d8d8;
+            margin-bottom: 14px;
+            padding-bottom: 12px
+        }
+
+            .cart-buybox h3 span {
+                font-weight: 400;
+                font-style: italic;
+                color: #d8d8d8
+            }
+
+    .cart-action p i {
+        width: 58%;
+        display: inline-block;
+        text-align: left
+    }
+
+    .cart-action span.amount {
+        margin-bottom: 0;
+        font-size: 13px;
+        width: auto
+    }
+
+    .cart-button {
+        box-sizing: border-box;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        width: 100%;
+        background-color: rgb(28, 134, 68);
+        text-decoration: none;
+        padding: 10px 0px;
+        margin: 10px 0px 0px;
+        border-width: 0px;
+        border-style: initial;
+        border-color: initial;
+        border-image: initial;
+        display: block;
+    }
+    .empty-cart {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+    }
+    .middled {
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+    }
+</style>
+<div class="single_post">
+    <div class="container">
+        <h2>Shopping Cart</h2>
+        @if (Model.Count() > 0)
+        {
+
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="shopping_cart">
+                        @using (Html.BeginForm("UpdateCart", "Products", FormMethod.Post, new { id = "cartForm" }))
+                        {
+                            <table class="table">
+                                <tr class="row">
+                                    <th class="col-md-1">
+                                        <input type="checkbox" id="cart_select_all" />
+                                    </th>
+                                    <th class="col-md-6">
+                                        Description
+                                    </th>
+                                    <th class="col-md-2">
+                                        Price
+                                    </th>
+                                    <th class="col-md-2">
+                                        Quantity
+                                    </th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="row">
+                                        <td class="col-md-1">
+                                            <input type="checkbox" data-id="@item.Id" class="cart_item_select" id="cart_item_select_@item.Id" />
+                                        </td>
+                                        <td class="col-md-6 cart_item_description">
+                                            <img src="@Url.Content("~/" + item.ImageUrl)" class="image" />
+                                            <div class="description">
+                                                @Html.DisplayFor(modelItem => item.Description)
+                                            </div>
+                                        </td>
+                                        <td class="col-md-2">
+                                            R @Html.DisplayFor(modelItem => item.Price)
+                                        </td>
+                                        <td class="col-md-2">
+
+                                            @Html.TextBoxFor(modelItem => item.Quantity, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(modelItem => item.Quantity, "", new { @class = "text-danger" })
+                                        </td>
+                                    </tr>
+                                }
+
+                            </table>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="cart-buybox">
+                        <h3>Cart Summary</h3>
+                        <div class="inner">
+                            <div class="cart-action">
+                                <p>
+                                    <i>Sub Total (@Model.Count() items)</i>
+                                    <span><abbr class="currency" title="ZAR" lang="en">R</abbr>&nbsp;<span class="amount"> @String.Format("{0:n2}", @ViewData["totalAmount"]) </span></span>
+                                </p>
+                                <p id="cartTotal">
+                                    <strong><i>Total</i> <span><abbr class="currency" title="ZAR" lang="en">R</abbr>&nbsp;<span class="amount"> @String.Format("{0:n2}", @ViewData["totalAmount"])</span></span></strong>
+                                </p>
+
+                                <a style="cursor:pointer" href="~/Checkout" title="Checkout Securely" class="cart-button" tabindex="1" id="checkOut1">Proceed to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <button id="removeSelectedItemBtn" class="btn btn-default disabled">Remove Selected Items.</button>
+                </div>
+            </div>
+            <br />
+            <p>Placing an item in your shopping cart does not reserve that item. We only reserve stock for your order once payment is received</p>
+        }
+        else
+        {
+            <div class="empty-cart">
+                <div class="centered middled">
+                    <div class="inner">
+                        <h3 style="margin-bottom: 1em; font-weight: normal;">Your cart is empty</h3>
+                        <a href="/" class="btn btn-primary">Continue</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        $(document).ready(() => {
+            function activateRemoveButton(checked) {
+                if (checked) {
+                    $("#removeSelectedItemBtn").removeClass("disabled");
+                    $("#removeSelectedItemBtn").addClass("btn-primary");
+                    $("#removeSelectedItemBtn").removeClass("btn-default");
+                } else {
+                    $("#removeSelectedItemBtn").addClass("disabled");
+                    $("#removeSelectedItemBtn").removeClass("btn-primary");
+                    $("#removeSelectedItemBtn").addClass("btn-default");
+                }
+            }
+            $('#cart_select_all:checkbox').change(function () {
+                var checked = $('#cart_select_all:checkbox:checked').length > 0;
+                $('.cart_item_select:checkbox').each(function () {
+                    $(this).prop('checked', checked);
+                });
+                activateRemoveButton(checked);
+            });
+            $('.cart_item_select:checkbox').change(function () {
+                var checked = $('.cart_item_select:checkbox:checked').length > 0;
+                activateRemoveButton(checked);
+            });
+
+            $("#removeSelectedItemBtn").click(() => {
+                var data = [];
+            
+                $('.cart_item_select:checkbox:checked').each(function(){
+
+                    data.push($(this).attr('data-id'));
+              
+                });
+              
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/Products/DeleteCartItems",
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result, status, xhr) {
+                        window.location.href = "/Products/Cart"
+                    },
+                    error: function (xhr, status, error) {
+
+                    }
+                });
+            });
+            $("#checkOut").click(() => {
+
+
+                $.ajax({
+                    type: "POST",
+                    data: $("#cartForm").serialize(),
+                    url: "~/Checkout",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result, status, xhr) {
+
+
+                    },
+                    error: function (xhr, status, error) {
+                        alert("error");
+                    }
+                });
+            });
+        });
+    </script>
+}
+

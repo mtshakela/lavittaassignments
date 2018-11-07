@@ -1,0 +1,92 @@
+﻿@model MyStore.Web.Models.OrderViewModel
+<style>
+    .order_item_description {
+        width: 100%;
+        padding: 5px;
+        color: #000000;
+    }
+
+        .order_item_description .image {
+            float: left;
+            width: 150px;
+        }
+
+        .order_item_description .description {
+            float: left;
+        }
+
+    .order-summary {
+        border-top: 1px solid #f4f4f4;
+        margin-bottom: 20px !important;
+        padding-top: 30px;
+    }
+</style>
+
+<div class="single_post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h4 style="color:#808080" class="pull-right">Order No: <b>#@String.Format("{0:D5}", Model.Id)</b> | Ordered @Html.DisplayFor(modelItem => Model.CreatedDate)</h4>
+            </div>
+
+        </div>
+        <div class="row order-summary">
+            <div class="shipping-address col-md-4">
+                <h3><i class="fa fa-address-book"></i> Shipping Address</h3>
+                <ul>
+                    <li>Moses</li>
+                    <li><pre>368 Madiba St</pre></li>
+                    <li>Pretoria</li>
+                    <li>0002</li>
+                </ul>
+            </div>
+            <div class="shipping-method col-md-4">
+                <h3><i class="fa fa-truck"></i> Shipping Method</h3>
+                <ul><li>Standard</li></ul>
+                <h3><i class="fa fa-credit-card"></i> Payment Method</h3>
+                <ul>
+                    <li>Credit Card</li>
+                </ul>
+            </div>
+            <div class=" col-md-4 summary-wrapper">
+                <h3><i class="fa fa-list"></i> Order Summary</h3>
+                <ul class="summary">
+                    <li>
+                        Item(s) Subtotal <span><span class="currency">R @String.Format("{0:n2}", Model.Total)</span></span>
+                    </li>
+                    <li>
+                        Shipping <span><span class="currency">R 0.00</span></span>
+                    </li>
+                </ul>
+                <ul class="total">
+                    <li class="emphasised">Order Total: <span><span class="currency">R @String.Format("{0:n2}", (Model.SubTotal))</span></span></li>
+                </ul>
+            </div>
+        </div>
+        <br />
+        <div class="card">
+            <div class="card-header">
+                <h5><b>@Model.Status</b></h5>
+            </div>
+            @foreach (var subItem in Model.Items)
+            {
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8 order_item_description">
+
+                            <img src="@Url.Content("~/" + subItem.ImageURL)" class="image" />
+                            <div class="description">
+                                <p><a href="~/Products/Details/@subItem.ProductName/@subItem.ProductId">@Html.DisplayFor(modelItem => subItem.ProductName)</a></p>
+                                <p style="color:#808080">Qty: @Html.DisplayFor(modelItem => subItem.Quantity)</p>
+                                <p>R @Html.DisplayFor(modelItem => subItem.Price)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            }
+        </div>
+        <br />
+    </div>
+</div>

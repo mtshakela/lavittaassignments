@@ -1,0 +1,90 @@
+﻿@model MyStore.Web.Models.NewOrderViewModel
+@{
+    Layout = "~/Views/Shared/_CheckoutLayout.cshtml";
+}
+<style>
+    .checkout table, .checkout table  thead{
+        width: 100%;
+    }
+    .checkout table th {
+        background-color: #afafaf;
+        font-weight: bold;
+    }
+
+</style>
+
+<div class="row justify-content-end">
+    <div class="col-md-3 justify-content-end">
+        <a href="~/Products/Cart"><i class="fa fa-shopping-cart"></i> Back to Cart</a>
+    </div>
+</div>
+<ul class="nav nav-pills justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link active">Order Summary</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link">Payment</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link">Confirmation</a>
+    </li>
+</ul>
+<br/>
+<h2>Order Summary</h2>
+
+<table>
+    <thead>
+        <tr class="row" >
+
+            <th class="col-md-6">
+                
+                <h4 style="padding-top:5px;">Description</h4>
+            </th>
+            <th class="col-md-2">
+                
+                <h4 style="padding-top:5px;">Quantity</h4>
+            </th>
+            <th class="col-md-2">
+                
+                <h4 style="padding-top:5px;">Price</h4>
+            </th>
+            <th class="col-md-2">
+                
+                <h4 style="padding-top:5px;">Sub Total</h4>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var item in Model.products)
+       {
+        <tr class="row">
+            <td class="col-md-6">
+                <img style="width:100px;float:left" src="@Url.Content(item.ImageUrl)" alt="@item.Name" />
+                <p style="float:left;padding:5px;">@Html.DisplayFor(modelItem => item.Description)</p>
+            </td>
+            <td class="col-md-2">
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td class="col-md-2">
+                R  @String.Format("{0:n2}",item.Price)
+            </td>
+            <td class="col-md-2">
+                R  @String.Format("{0:n2}", (item.Quantity * item.Price))
+            </td>
+        </tr>
+       }
+        
+        <tr class="row">
+            <td class="col-md-10" colspan="5" style="text-align:right"><b>Total:</b></td>
+            <td class="col-md-2" c><b>R @String.Format("{0:n2}", @Model.products.Sum(item => item.Quantity * item.Price))</b></td>
+        </tr>
+    </tbody>
+</table>
+<br />
+
+<div class="row justify-content-end">
+    <div class="col-md-2">
+        <a href="~/Checkout/Payment" class="btn btn-default pull-right">Contine <i class="fa fa-arrow-right"></i></a>
+    </div>
+</div>

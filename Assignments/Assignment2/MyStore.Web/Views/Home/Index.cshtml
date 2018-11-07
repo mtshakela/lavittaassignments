@@ -1,0 +1,98 @@
+﻿<!-- Banner -->
+<link href="~/plugins/slick-1.8.0/slick.css" rel="stylesheet" />
+<link href="~/Content/main_styles.css" rel="stylesheet" />
+<div class="banner">
+    <div class="banner_background" style="background-image:url(@Url.Content("~/images/banner_background.jpg)")"></div>
+    <div class="container fill_height">
+        <div class="row fill_height">
+            <div class="banner_product_image"><img src="@Url.Content("~/images/banner.jpg")" alt=""></div>
+            <div class="col-lg-5 offset-lg-4 fill_height">
+                <div class="banner_content">
+                    <div class="button banner_button">
+                        @Html.ActionLink("Shop Now", "", "Products", routeValues: null, htmlAttributes: new { })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="deals_featured">
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex flex-lg-row flex-column align-items-center justify-content-start">
+
+                <!-- Deals -->
+                <!-- Featured -->
+                <div class="featured">
+                    <div class="tabbed_container">
+                        <div class="tabs">
+                            <ul class="clearfix">
+                                <li class="active"><a href="javascript:void(0);" id="featured">Featured<a /></li>
+                               @* <li><a href="javascript:void(0);" id="onSale">On Sale</a></li>*@
+                            </ul>
+                            <div class="tabs_line"><span style="left: 0px; width: 79.0938px;"></span></div>
+                        </div>
+
+                        <!-- Product Panel -->
+                        <div class="product_panel panel">
+                            <div class="featured_slider slider">
+
+                               
+
+                            </div>
+                            <div class="featured_slider_dots_cover"></div>
+                        </div>
+
+
+                        <!-- Product Panel -->
+                        <div class="product_panel panel active">
+                            <div class="featured_slider slider">
+
+   
+                                @Html.Action("GetProductsByFilter", "Products", new { filter = "" });
+                            </div>
+                            <div class="featured_slider_dots_cover"></div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <script src="~/plugins/slick-1.8.0/slick.js"></script>
+    <script src="~/Scripts/custom.js"></script>
+   <script>
+       $(document).ready(() => {
+          // getProducts("featured");
+
+           function getProducts(filter) {
+               $.ajax({
+                   type: "GET",
+                   url: "/Products/filtered/" + filter,
+                   contentType: "application/json; charset=utf-8",
+                   success: function (result, status, xhr) {
+                       var html = "";
+                       for (var item in result) {
+                           html  +=` `
+
+                       }
+                       document.getElementById("products").innerHTML = result;
+                   },
+                   error: function (xhr, status, error) {
+                       alert(JSON.stringify(error));
+                   }
+               });
+           }
+       });
+    </script>
+}

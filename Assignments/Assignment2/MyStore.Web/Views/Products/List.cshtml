@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MyStore.Web.Models.ProductViewModel>
+
+
+@foreach (var item in Model)
+{
+    using (Html.BeginForm("AddToCart", "Products", new
+    {
+        productId = item.Id
+    ,
+        returnUrl = Request.Url
+    }, FormMethod.Post, new { id = String.Format("product -{0}", item.Id) }))
+    {
+        @Html.AntiForgeryToken()
+
+        var discountClass = @item.DiscountPercentage > 0 ? "discount" : "";
+
+   
+        <div class="featured_slider_item" style="width:100% !important">
+            <div class="border_active"></div>
+            <div class="product_item d-flex flex-column align-items-center justify-content-center text-center @discountClass ">
+                <div class="product_border"></div>
+                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="~/@item.ImageUrl" alt="@item.Name"></div>
+                <div class="product_content">
+                    <div class="product_price">R @String.Format("{0:n2}", @item.Price)</div>
+                    <div class="product_name"><div><a href="~/Products/Details/@item.Name/@item.Id" tabindex="0">@item.Name</a></div></div>
+                    <div class="product_extras">
+                        <button onclick="javascript:document.getElementById(@String.Format("product-{0}",@item.Id)).submit()" class="product_cart_button">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product_fav"><i class="fas fa-heart"></i></div>
+                <ul class="product_marks">
+                    <li class="product_mark product_discount">-@String.Format("{0:n0}", @item.DiscountPercentage)%</li>
+                </ul>
+            </div>
+        </div>
+    }
+}
+

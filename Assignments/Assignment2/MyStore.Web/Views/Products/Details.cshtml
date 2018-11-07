@@ -1,0 +1,66 @@
+﻿@model MyStore.Web.Models.ProductViewModel
+<link rel="stylesheet" type="text/css" href="~/Content/product_styles.css">
+<link rel="stylesheet" type="text/css" href="~/Content/product_responsive.css">
+
+<div class="single_product">
+    <div class="container">
+        <div class="row">
+          
+
+
+            <!-- Selected Image -->
+            <div class="col-lg-5 order-lg-2 order-1">
+                <div class="image_selected"><img src="@Url.Content("~/" + Model.ImageUrl)" alt=""></div>
+            </div>
+
+            <!-- Description -->
+            <div class="col-lg-5 order-3">
+              
+                    <div class="product_description">
+                        <div class="product_category">@Model.Category</div>
+                        <div class="product_name">@Model.Name</div>
+
+                        <div class="product_text"><p>@Model.Description</p></div>
+                        <div class="order_info d-flex flex-row">
+                            @using (Html.BeginForm("AddToCart", "Products", new
+                            {
+                                productId = Model.Id,
+                                quantity = Model.Quantity
+,
+                                returnUrl = Request.Url
+                            }, FormMethod.Post, new { id = "productId" }))
+                            {
+
+                                <div class="clearfix" style="z-index: 1000;">
+                                    <!-- Product Quantity -->
+                                    <div class="product_quantity clearfix">
+                                        <span>Quantity: </span>
+                                        @Html.TextBoxFor(modelItem => Model.Quantity, "", new { id = "quantity_input", pattern = "[0-9]*" })
+
+                                        <div class="quantity_buttons">
+                                            <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fas fa-chevron-up"></i></div>
+                                            <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fas fa-chevron-down"></i></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="product_price">R @Html.DisplayFor(itm=>Model.Price)</div>
+                                <div class="button_container">
+                                    <button type="button" onclick="javascript:document.getElementById('productId').submit()" class="button cart_button">Add to Cart</button>
+                                    @*<div class="product_fav"><i class="fas fa-heart"></i></div>*@
+                                </div>
+                            }
+                        </div>
+                    </div>
+               
+
+            </div>
+
+           
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script src="~/Scripts/product_custom.js"></script>
+    }

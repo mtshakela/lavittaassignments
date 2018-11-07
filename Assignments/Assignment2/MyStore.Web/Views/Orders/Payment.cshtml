@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_CheckoutLayout.cshtml";
+}
+
+<div class="row justify-content-end">
+    <div class="col-md-3 justify-content-end">
+        <a href="~/Products/Cart"><i class="fa fa-shopping-cart"></i> Back to Cart</a>
+    </div>
+</div>
+<ul class="nav nav-pills justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link ">Order Summary</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active">Payment</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link">Confirmation</a>
+    </li>
+</ul>
+<br />
+<h2>Payment</h2>
+<br />
+<p style="text-align:center;color:red"><h3>NB!! Payment Methods to be implimented.</h3></p>
+<div class="row justify-content-end">
+    <div class="col-md-2">
+        <a href="~/Checkout" class="btn btn-default pull-right"><i class="fa fa-arrow-left"></i>Back </a>
+    </div>
+    <div class="col-md-2">
+        @using (Html.BeginForm("SubmitOrder", "Orders", FormMethod.Post, new { id = "paymentForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a class="btn btn-default pull-right" href="javascript:document.getElementById('paymentForm').submit()">Submit <i class="fa fa-arrow-right"></i></a>
+
+        }
+    </div>
+</div>
+
+

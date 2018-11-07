@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Confirmation";
+    Layout = "~/Views/Shared/_CheckoutLayout.cshtml";
+}
+<style>
+    .order_confirmantion {
+        width: 100%;
+        padding: 10px;
+        min-height: 120px;
+        text-align: center;
+        background-color:#808080;
+    }
+</style>
+<div class="row justify-content-end">
+    <div class="col-md-3 justify-content-end">
+        <a href="/" class=" pull-right"><i class="fa fa-home"></i> Home </a>
+    </div>
+</div>
+<ul class="nav nav-pills justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link ">Order Summary</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link">Payment</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active">Confirmation</a>
+    </li>
+</ul>
+<br />
+
+
+<div class="order_confirmantion">
+    <h2>Order confirmation</h2>
+    <p style="color:#fff;">Hi <b>@ViewData["username"]</b>, we've recieved order No: @ViewData["orderNumber"] and are working on it now.</p>
+    <p style="color:#fff;">We'll email you an update when we've shipped it or ready for collection.</p>
+    <a class="btn btn-lg btn-default" style="background-color:#2e2d2d !important;" href="~/Orders/Details/@ViewData["orderNumber"]">View you order details</a>
+</div>
+
+<br />
+
+

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MyStore.Web.Models.OrderViewModel>
+
+<style>
+    .order_item_description {
+        width: 100%;
+        padding: 5px;
+        color: #000000;
+    }
+
+        .order_item_description .image {
+            float: left;
+            width: 150px;
+        }
+
+        .order_item_description .description {
+            float: left;
+        }
+</style>
+<div class="single_post">
+    <div class="container">
+        <h2>Orders</h2>
+        @if (Model.Count() == 0)
+        {
+            <h5 style="text-align:center">No orders available..</h5>
+        }
+
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-10">
+                    <h4 style="color:#808080">  <a href="~/orders/details/@item.Id" class="btn btn-default pull-right"><b>#@String.Format("{0:D5}", @item.Id)</b></a> | Ordered @Html.DisplayFor(modelItem => item.CreatedDate)</h4>
+                </div>
+                <div class="col-md-2">
+                    <a href="~/orders/details/@item.Id" class="btn btn-primary pull-right">View Details</a>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-header">
+                    <h5><b>@item.Status</b></h5>
+                </div>
+                @foreach (var subItem in item.Items)
+                {
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8 order_item_description">
+
+                                <img src="@Url.Content("~/" + subItem.ImageURL)" class="image" />
+                                <div class="description">
+                                    <p><a href="~/Products/Details/@subItem.ProductName/@subItem.ProductId">@Html.DisplayFor(modelItem => subItem.ProductName)</a></p>
+                                    <p style="color:#808080">Qty: @Html.DisplayFor(modelItem => subItem.Quantity)</p>
+                                    <p>R @Html.DisplayFor(modelItem => subItem.Price)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+            </div>
+            <br />
+            <hr />
+        }
+    </div>
+</div>

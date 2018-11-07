@@ -1,0 +1,113 @@
+﻿@model IEnumerable<MyStore.Web.Models.ProductViewModel>
+<link href="~/Content/shop_styles.css" rel="stylesheet" />
+<link href="~/Content/shop_responsive.css" rel="stylesheet" />
+<div class="home">
+    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/shop_background.jpg"></div>
+    <div class="home_overlay"></div>
+    <div class="home_content d-flex flex-column align-items-center justify-content-center">
+        <h2 class="home_title">Our Products</h2>
+    </div>
+</div>
+
+<!-- Shop -->
+
+<div class="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+
+                <!-- Shop Sidebar -->
+                <div class="shop_sidebar">
+                    <div class="sidebar_section">
+                        <div class="sidebar_title">Categories</div>
+                        <ul class="sidebar_categories" id="product_cat"></ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-9">
+
+                <!-- Shop Content -->
+                <div class="shop_content">
+                    <div class="shop_bar clearfix">
+                        <div class="shop_product_count"><span>@Model.Count()</span> products found</div>
+                        <div class="shop_sorting">
+                            <span>Sort by:</span>
+                            <ul>
+                                <li>
+                                    <span class="sorting_text">name<i class="fas fa-chevron-down"></i></span>
+                                    <ul>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "name" }'>name</li>
+                                        <li class="shop_sorting_button" data-isotope-option='{ "sortBy": "price" }'>price</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="product_grid">
+                        <div class="product_grid_border"></div>
+                        @Html.Partial("List", Model)
+
+                    </div>
+                </div>
+               
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/plugins/easing/easing.js"></script>
+    <script src="~/plugins/Isotope/isotope.pkgd.min.js"></script>
+    <script src="~/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="~/plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="~/Scripts/shop_custom.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //Gets list of product categories
+            function getProductCategories() {
+                $.ajax({
+                    type: "GET",
+                    url: "/Products/GetProductCategories",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result, status, xhr) {
+
+                        createProductCategoryList(result);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("error");
+                    }
+                });
+            }
+            function createProductCategoryList(list) {
+                var ul2 = document.getElementById("product_cat");
+                for (var i = 0; i < list.length; i++) {
+                    ul2.innerHTML += "<li><a href=\"/Products/" + list[i].name + "\">" + list[i].name + "</a></li>";
+                }
+
+            }
+
+            function addToCart(item) {
+                alert(JSON.stringify(item));
+                $.ajax({
+                    type: "GET",
+                    url: "/Products/GetProductCategories",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result, status, xhr) {
+
+                        createProductCategoryList(result);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("error");
+                    }
+                });
+            }
+            getProductCategories();
+        });
+        
+    </script>
+}

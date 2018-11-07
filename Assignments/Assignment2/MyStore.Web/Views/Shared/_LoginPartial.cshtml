@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="user_icon"><img src="@Url.Content("~/images/user.svg")" alt=""></div>
+        <div>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </div>
+
+        <div><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></div>
+
+    }
+    @*<div class="user_icon"><img src="@Url.Content("~/images/user.svg")" alt=""></div>
+        <div><a href="#">Register</a></div>
+        <div><a href="#">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</a></div>*@
+}
+else
+{
+    <div class="user_icon"><img  src="@Url.Content("~/images/user.svg")" alt=""></div>
+    <div>
+            <a>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</a>
+        </div>
+        <div><a>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</a>  </div>
+    
+
+}
+
